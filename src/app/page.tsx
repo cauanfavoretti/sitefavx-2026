@@ -1,3 +1,4 @@
+import { WhatsappFloat } from "@/components/whatsapp-float";
 import { Navbar } from "@/components/navbar";
 import { QualifyDialog } from "@/components/qualify";
 import { Hero } from "@/components/sections/hero";
@@ -29,6 +30,7 @@ export default function Home() {
         <CtaFooter />
       </div>
       <QualifyDialog />
+      <WhatsappFloat />
     </>
   );
 }
