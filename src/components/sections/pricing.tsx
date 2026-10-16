@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import { BadgeCheck, Check } from "lucide-react";
 
+import { PricingCountdown } from "@/components/campaign-countdown";
 import { Button } from "@/components/ui/button";
 import { openQualify } from "@/components/qualify";
 import { cn } from "@/lib/utils";
@@ -84,6 +85,7 @@ export function Pricing() {
                     <span aria-hidden className="h-px flex-1 bg-gradient-to-r from-favx-orange-light/50 to-transparent" />
                   </p>
                 )}
+                {plan.promo && <PricingCountdown />}
                 <p className="flex items-baseline gap-1">
                   <span className="text-5xl font-medium tracking-tight">{plan.monthly}</span>
                   <span className="text-muted-foreground">/mês</span>
