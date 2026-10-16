@@ -54,7 +54,7 @@ export function Navbar() {
         hidden: { y: "-110%", opacity: 0, transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
       }}
       custom={hasHidden}
-      className="fixed inset-x-0 top-0 z-50 px-4 pt-4 md:px-8 md:pt-5 lg:px-12"
+      className="fixed inset-x-0 top-[var(--promo-banner-height)] z-50 px-4 pt-4 md:px-8 md:pt-5 lg:px-12"
     >
       <nav className="mx-auto flex max-w-[1600px] items-center justify-between gap-3">
         <div className="flex items-center gap-2">

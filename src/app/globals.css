@@ -272,3 +272,9 @@ html.lenis body {
 .hero-color-word {
   color: var(--hero-effect-color, #2f6bff);
 }
+
+:root { --promo-banner-height: 0px; }
+:root:has(.promo-banner) { --promo-banner-height: 80px; }
+@media (min-width: 768px) {
+  :root:has(.promo-banner) { --promo-banner-height: 48px; }
+}

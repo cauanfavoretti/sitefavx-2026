@@ -59,7 +59,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(3,3,8,0.85)_0%,rgba(3,3,8,0.35)_45%,transparent_70%),linear-gradient(0deg,rgba(3,3,8,1)_0%,transparent_35%)]"
       />
 
-      <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-5 pb-8 pt-36 md:px-12 md:pt-44 lg:px-[5.5rem]">
+      <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-5 pb-8 pt-[calc(9rem+var(--promo-banner-height))] md:px-12 md:pt-[calc(11rem+var(--promo-banner-height))] lg:px-[5.5rem]">
         <div className="hero-copy flex flex-1 flex-col justify-center">
           <h1 className="text-[clamp(3.4rem,9.2vw,9.5rem)] font-medium leading-[0.95] tracking-[-0.045em]">
             {headline.map((line, li) => (

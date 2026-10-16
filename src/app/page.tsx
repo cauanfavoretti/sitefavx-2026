@@ -1,3 +1,4 @@
+import { PromoBanner } from "@/components/promo-banner";
 import { WhatsappFloat } from "@/components/whatsapp-float";
 import { Navbar } from "@/components/navbar";
 import { QualifyDialog } from "@/components/qualify";
@@ -13,6 +14,7 @@ import { CtaFooter } from "@/components/sections/cta-footer";
 export default function Home() {
   return (
     <>
+      <PromoBanner />
       <Navbar />
       <main>
         <Hero />
