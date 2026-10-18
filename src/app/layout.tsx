@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Venda mais com tecnologia de IA da FAVX",
-  description: "Controle, construa e venda mais com a tecnologia FAVX.",
+  description: "Construímos tecnologia de IA para seu negócio vender mais",
 };
 
 export const viewport: Viewport = {

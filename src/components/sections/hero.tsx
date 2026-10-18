@@ -77,8 +77,7 @@ export function Hero() {
           </h1>
 
           <p className="hero-sub mt-7 max-w-xl text-lg leading-relaxed text-white/70 md:text-xl">
-            Controle, construa e venda mais com a tecnologia{" "}
-            <span className="font-medium text-white">FAVX</span>.
+            Construímos tecnologia de IA para seu negócio vender mais
           </p>
 
           <div className="hero-cta mt-10 flex flex-wrap items-center gap-4">
