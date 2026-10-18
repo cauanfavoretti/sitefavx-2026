@@ -16,7 +16,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 // WebGL só no cliente
 const HeroBeams = dynamic(() => import("@/components/hero-beams"), { ssr: false });
 
-const headline = [["Cresça", "com"], ["o", "futuro"]];
+const headline = [["Venda", "mais"], ["com", "tecnologia"], ["de", "IA", "da", "FAVX"]];
 
 export function Hero() {
   const root = useRef<HTMLElement>(null);
@@ -61,12 +61,12 @@ export function Hero() {
 
       <div className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col px-5 pb-8 pt-[calc(9rem+var(--promo-banner-height))] md:px-12 md:pt-[calc(11rem+var(--promo-banner-height))] lg:px-[5.5rem]">
         <div className="hero-copy flex flex-1 flex-col justify-center">
-          <h1 className="text-[clamp(3.4rem,9.2vw,9.5rem)] font-medium leading-[0.95] tracking-[-0.045em]">
+          <h1 className="text-[clamp(2.7rem,6.6vw,7rem)] font-medium leading-[0.95] tracking-[-0.045em]">
             {headline.map((line, li) => (
               <span key={li} className="block overflow-hidden pb-[0.08em]">
                 {line.map((word, wi) => (
                   <span key={word} className="inline-block">
-                    <span className={`hero-word inline-block ${word === "futuro" ? "hero-color-word" : ""}`}>
+                    <span className={`hero-word inline-block ${word === "FAVX" ? "hero-color-word" : ""}`}>
                       {word}
                     </span>
                     {wi < line.length - 1 && " "}
