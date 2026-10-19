@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { AnimatePresence, motion, useInView } from "motion/react";
 import {
   Bot,
@@ -13,9 +14,10 @@ import {
 } from "lucide-react";
 
 import { scrollToTarget } from "@/components/smooth-scroll";
-import { BuilderFlow } from "@/components/sections/builder-flow";
 import { cn } from "@/lib/utils";
 import { SPARKLE_ORANGE, SparkleField } from "@/components/sparkle-field";
+
+const BuilderFlow = dynamic(() => import("@/components/sections/builder-flow").then((m) => m.BuilderFlow), { ssr: false });
 
 type Mode = "simple" | "advanced";
 
@@ -40,6 +42,7 @@ const modes: { id: Mode; icon: LucideIcon; title: string; text: string }[] = [
 export function AiBuilder() {
   const root = useRef<HTMLElement>(null);
   const inView = useInView(root, { amount: 0.35 });
+  const visible = useInView(root, { amount: 0 });
   const [started, setStarted] = useState(false);
   const [mode, setMode] = useState<Mode>("simple");
   // Muda a cada troca de cena para reiniciar animações e barra de progresso
@@ -154,12 +157,12 @@ export function AiBuilder() {
 
         {/* Visual: cartão em gradiente com a "tela" do FAVX Hub */}
         <div className="relative h-[620px] w-full overflow-hidden rounded-[2.5rem] bg-black sm:aspect-square sm:h-auto">
-          <SparkleField gradient={SPARKLE_ORANGE} />
+          <SparkleField gradient={SPARKLE_ORANGE} active={visible} />
           <Halftone />
           <div className="theme-light liquid-glass absolute inset-x-[5%] bottom-[7%] top-[7%] flex flex-col overflow-hidden rounded-[1.75rem]">
             <ScreenBar mode={mode} onSelect={select} />
             <div className="relative flex-1 bg-[radial-gradient(rgba(47,107,255,0.14)_1px,transparent_1.2px)] bg-[size:18px_18px]">
-              {started && (
+              {started && visible && (
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={`${mode}-${cycle}`}

@@ -16,11 +16,13 @@ export const SPARKLE_ORANGE =
 export function SparkleField({
   gradient,
   className,
+  active = true,
   /** Degradê que apaga a textura em uma das pontas do cartão */
   fade = "linear-gradient(160deg, rgba(0,0,0,0.55) 0%, #000 45%)",
 }: {
   gradient: string;
   className?: string;
+  active?: boolean;
   fade?: string;
 }) {
   return (
@@ -29,8 +31,8 @@ export function SparkleField({
       className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
       style={{ WebkitMaskImage: fade, maskImage: fade }}
     >
-      <div className="sparkle-field absolute inset-0" style={{ backgroundImage: gradient }} />
-      <div className="sparkle-field-soft absolute inset-0" style={{ backgroundImage: gradient }} />
+      <div className="sparkle-field absolute inset-0" style={{ backgroundImage: gradient, animationPlayState: active ? "running" : "paused" }} />
+      <div className="sparkle-field-soft absolute inset-0" style={{ backgroundImage: gradient, animationPlayState: active ? "running" : "paused" }} />
     </div>
   );
 }

@@ -261,12 +261,10 @@ html.lenis body {
   }
 }
 
-/* O fallback da hero acompanha o ciclo de cor dos feixes WebGL. */
+/* Luz ambiente suave atrás da estrela de partículas. */
 .hero-color-glow {
-  background-color: var(--hero-effect-color, #2f6bff);
-  opacity: 0.35;
-  -webkit-mask-image: radial-gradient(55% 55% at 85% 30%, #000, transparent 70%);
-  mask-image: radial-gradient(55% 55% at 85% 30%, #000, transparent 70%);
+  background: radial-gradient(ellipse at 50% 45%, #2f6bff14, transparent 55%),
+    radial-gradient(ellipse at 78% 65%, #ff5a140c, transparent 45%);
 }
 
 .hero-color-word {
@@ -277,4 +275,17 @@ html.lenis body {
 :root:has(.promo-banner) { --promo-banner-height: 80px; }
 @media (min-width: 768px) {
   :root:has(.promo-banner) { --promo-banner-height: 48px; }
+}
+
+/* Dissolve a moldura de pontos nas quatro bordas, sem um recorte retangular. */
+.nexus-chat-halo {
+  --halo-fade: 64px;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 var(--halo-fade), #000 calc(100% - var(--halo-fade)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--halo-fade), #000 calc(100% - var(--halo-fade)), transparent);
+  mask-image:
+    linear-gradient(to right, transparent, #000 var(--halo-fade), #000 calc(100% - var(--halo-fade)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--halo-fade), #000 calc(100% - var(--halo-fade)), transparent);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
 }

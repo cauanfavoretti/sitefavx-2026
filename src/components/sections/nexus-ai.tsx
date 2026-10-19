@@ -5,7 +5,6 @@ import { AnimatePresence, motion, useInView } from "motion/react";
 import {
   AtSign,
   CalendarCheck,
-  ChevronRight,
   CircleDollarSign,
   FileText,
   FileStack,
@@ -16,12 +15,9 @@ import {
   Plus,
   RefreshCw,
   SendHorizonal,
-  Target,
-  Users,
   type LucideIcon,
 } from "lucide-react";
 
-import { scrollToTarget } from "@/components/smooth-scroll";
 import { cn } from "@/lib/utils";
 import { SPARKLE_BLUE, SparkleField } from "@/components/sparkle-field";
 
@@ -134,25 +130,18 @@ const SCENARIOS: Scenario[] = [
 ];
 
 const SYS_META: Record<SysKind, { icon: LucideIcon; className: string }> = {
-  crm: { icon: RefreshCw, className: "border-favx-blue/20 bg-favx-blue/10 text-favx-blue" },
-  proposal: { icon: FileText, className: "border-sky-300/50 bg-sky-50 text-sky-600" },
-  calendar: { icon: CalendarCheck, className: "border-slate-200 bg-slate-50 text-slate-500" },
+  crm: { icon: RefreshCw, className: "border-favx-blue/20 bg-favx-blue/10 text-favx-blue-light" },
+  proposal: { icon: FileText, className: "border-sky-400/20 bg-sky-400/10 text-sky-300" },
+  calendar: { icon: CalendarCheck, className: "border-white/10 bg-white/[0.05] text-slate-400" },
   sale: { icon: CircleDollarSign, className: "border-transparent bg-favx-blue text-white" },
 };
 
-const features: { icon: LucideIcon; text: string }[] = [
-  { icon: Users, text: "Estratégia desenhada por especialistas em vendas" },
-  { icon: Target, text: "Atende, qualifica e negocia no WhatsApp" },
-  { icon: RefreshCw, text: "Atualiza o funil e o sistema sozinho" },
-  { icon: CalendarCheck, text: "Agenda visitas, consultas e entregas" },
-  { icon: CircleDollarSign, text: "Envia propostas e links de pagamento" },
-];
-
 /* ------------------------------------------------------------------ Seção */
 
-export function NexusAi() {
-  const root = useRef<HTMLElement>(null);
+export function NexusChat() {
+  const root = useRef<HTMLDivElement>(null);
   const inView = useInView(root, { amount: 0.3 });
+  const visible = useInView(root, { amount: 0 });
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
   const [cycle, setCycle] = useState(0);
@@ -167,97 +156,30 @@ export function NexusAi() {
   }
 
   return (
-    <section id="nexus" ref={root} className="relative py-24 md:py-36">
-      <div className="mx-auto grid max-w-[1600px] items-center gap-14 px-5 md:px-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-[5.5rem]">
-        {/* Texto */}
-        <div>
-          <h2 className="text-[clamp(2.4rem,4.6vw,4.25rem)] font-medium leading-[1.02] tracking-[-0.04em]">
-            O comercial inteligente que <span className="text-favx-blue">fecha vendas</span> por você
-          </h2>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
-            O Nexus AI é o modelo de IA nativo da FAVX para o seu comercial, adaptado ao seu negócio.
-            Grandes estrategistas de vendas desenham e coordenam cada etapa da abordagem, e o Nexus
-            executa no WhatsApp — gerando mais vendas e mais organização, 24 horas por dia.
-          </p>
-
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2">
-            {features.map((f) => (
-              <li key={f.text} className="flex items-start gap-3 text-foreground/80">
-                <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-lg border border-favx-blue/30 bg-favx-blue/15">
-                  <f.icon className="size-3.5 text-favx-blue" />
-                </span>
-                <span className="leading-snug">{f.text}</span>
-              </li>
-            ))}
-          </ul>
-
-          <div className="mt-10">
-            <p className="mb-3 text-sm text-muted-foreground">Veja o Nexus em diferentes modelos comerciais</p>
-            <div className="flex flex-wrap gap-2">
-              {SCENARIOS.map((s, i) => (
-                <button
-                  key={s.id}
-                  type="button"
-                  onClick={() => select(i)}
-                  aria-pressed={i === index}
-                  className={cn(
-                    "relative rounded-full border px-4 py-2 text-sm transition-colors",
-                    i === index
-                      ? "border-transparent text-white"
-                      : "border-black/10 text-slate-600 hover:border-black/25 hover:text-slate-900"
-                  )}
-                >
-                  {i === index && (
-                    <motion.span
-                      layoutId="nexus-chip"
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-favx-blue to-[#1b2a8a]"
-                      transition={{ type: "spring", stiffness: 380, damping: 32 }}
-                    />
-                  )}
-                  <span className="relative">{s.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <a
-            href="#contato"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollToTarget("#contato");
-            }}
-            className="group mt-10 inline-flex items-center gap-1 text-favx-blue transition-colors hover:text-slate-900"
-          >
-            Quero o Nexus no meu comercial
-            <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
-          </a>
-        </div>
-
-        {/* Visual: a conversa como ela aparece no aplicativo */}
-        <div className="theme-dark relative h-[680px] w-full overflow-hidden rounded-[2.5rem] bg-black sm:aspect-square sm:h-auto">
-          <SparkleField gradient={SPARKLE_BLUE} />
-          <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
-            <div className="theme-light flex h-full w-full overflow-hidden rounded-[1.75rem] border border-black/5 bg-white shadow-[0_40px_90px_-30px_rgba(0,0,0,0.95)]">
-              <Sidebar index={index} onSelect={select} />
-              <div className="flex min-w-0 flex-1 flex-col">
-                {started ? (
-                  <ChatDemo
-                    key={`${scenario.id}-${cycle}`}
-                    scenario={scenario}
-                    onDone={() => {
-                      setIndex((i) => (i + 1) % SCENARIOS.length);
-                      setCycle((c) => c + 1);
-                    }}
-                  />
-                ) : (
-                  <ChatHeader scenario={scenario} />
-                )}
-              </div>
-            </div>
+    <div id="nexus" ref={root} className="theme-dark relative h-[540px] w-full rounded-[2rem] sm:h-[600px] lg:h-[560px] xl:h-[600px]">
+      <div className="nexus-chat-halo pointer-events-none absolute -inset-6 sm:-inset-8">
+        <SparkleField gradient={SPARKLE_BLUE} active={visible} fade="none" />
+      </div>
+      <div className="absolute inset-0 flex items-center justify-center p-4 sm:p-6">
+        <div className="theme-dark flex h-full w-full overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0d1320] shadow-[0_40px_90px_-30px_rgba(0,0,0,0.95)]">
+          <Sidebar index={index} onSelect={select} />
+          <div className="flex min-w-0 flex-1 flex-col">
+            {started && visible ? (
+              <ChatDemo
+                key={`${scenario.id}-${cycle}`}
+                scenario={scenario}
+                onDone={() => {
+                  setIndex((i) => (i + 1) % SCENARIOS.length);
+                  setCycle((c) => c + 1);
+                }}
+              />
+            ) : (
+              <ChatHeader scenario={scenario} />
+            )}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
 
@@ -290,7 +212,7 @@ function Avatar({ name, nexus, className }: { name?: string; nexus?: boolean; cl
     .map((w) => w[0])
     .join("");
   return (
-    <span className={cn("grid size-8 shrink-0 place-items-center rounded-full bg-favx-blue/10 text-[11px] font-semibold text-favx-blue", className)}>
+    <span className={cn("grid size-8 shrink-0 place-items-center rounded-full bg-favx-blue/10 text-[11px] font-semibold text-favx-blue-light", className)}>
       {initials}
     </span>
   );
@@ -306,7 +228,7 @@ const sidebarLinks = [
 /** Barra lateral do aplicativo: cada conversa é um modelo comercial. */
 function Sidebar({ index, onSelect }: { index: number; onSelect: (i: number) => void }) {
   return (
-    <aside className="hidden w-[196px] shrink-0 flex-col border-r border-black/5 bg-[#f6f8fd] p-3 lg:flex">
+    <aside className="hidden w-[160px] shrink-0 flex-col border-r border-white/10 bg-[#101827] p-3 xl:flex">
       <span className="mb-4 flex items-center gap-2 rounded-xl bg-favx-blue px-3 py-2.5 text-[13px] font-medium text-white shadow-[0_8px_20px_-8px_rgba(47,107,255,0.9)]">
         <PenLine className="size-3.5" />
         Nova conversa
@@ -314,7 +236,7 @@ function Sidebar({ index, onSelect }: { index: number; onSelect: (i: number) => 
 
       <ul className="space-y-0.5">
         {sidebarLinks.map((l) => (
-          <li key={l.label} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] text-slate-500">
+          <li key={l.label} className="flex items-center gap-2.5 rounded-lg px-2.5 py-2 text-[13px] text-slate-400">
             <l.icon className="size-3.5" />
             {l.label}
           </li>
@@ -331,7 +253,7 @@ function Sidebar({ index, onSelect }: { index: number; onSelect: (i: number) => 
               aria-pressed={i === index}
               className={cn(
                 "flex w-full items-center gap-2.5 rounded-lg px-2 py-2 text-left text-[13px] transition-colors",
-                i === index ? "bg-favx-blue/10 font-medium text-favx-blue" : "text-slate-600 hover:bg-black/[0.04]"
+                i === index ? "bg-favx-blue/20 font-medium text-favx-blue-light" : "text-slate-300 hover:bg-white/[0.06]"
               )}
             >
               <Avatar name={s.clientFull} className="size-7" />
@@ -347,17 +269,17 @@ function Sidebar({ index, onSelect }: { index: number; onSelect: (i: number) => 
 
 function ChatHeader({ scenario }: { scenario: Scenario }) {
   return (
-    <div className="flex items-center gap-3 border-b border-black/[0.07] px-4 py-3.5 sm:px-5">
-      <Avatar name={scenario.clientFull} className="lg:hidden" />
+    <div className="flex items-center gap-3 border-b border-white/[0.08] px-4 py-3.5 sm:px-5">
+      <Avatar name={scenario.clientFull} className="xl:hidden" />
       <div className="min-w-0 flex-1">
         <p className="truncate text-[15px] font-semibold">Conversa com {scenario.clientFull}</p>
         <p className="truncate text-[11px] text-slate-400">
           Nexus AI · {scenario.business}
           <span className="hidden sm:inline"> · </span>
-          <span className="hidden text-favx-blue sm:inline">online no WhatsApp</span>
+          <span className="hidden text-favx-blue-light sm:inline">online no WhatsApp</span>
         </p>
       </div>
-      <span className="grid size-8 shrink-0 place-items-center rounded-lg border border-black/10 text-slate-400">
+      <span className="grid size-8 shrink-0 place-items-center rounded-lg border border-white/10 text-slate-400">
         <ListFilter className="size-4" />
       </span>
     </div>
@@ -424,10 +346,10 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
       <ChatHeader scenario={scenario} />
 
       {/* Etapa do funil atualizada em tempo real */}
-      <div className="border-b border-black/[0.07] px-5 py-3">
+      <div className="border-b border-white/[0.08] px-5 py-3">
         <div className="flex items-center justify-between text-[11px] text-slate-400">
           <span>
-            Funil · <span className={cn("transition-colors", closed ? "text-favx-blue" : "text-slate-700")}>{STAGES[stage]}</span>
+            Funil · <span className={cn("transition-colors", closed ? "text-favx-blue-light" : "text-slate-200")}>{STAGES[stage]}</span>
           </span>
           <AnimatePresence mode="popLayout">
             {value && (
@@ -436,7 +358,7 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
-                className={cn("font-medium tabular-nums", closed ? "text-favx-blue" : "text-slate-500")}
+                className={cn("font-medium tabular-nums", closed ? "text-favx-blue-light" : "text-slate-400")}
               >
                 {value}
               </motion.span>
@@ -445,7 +367,7 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
         </div>
         <div className="mt-2 grid grid-cols-5 gap-1.5">
           {STAGES.map((s, i) => (
-            <span key={s} className="h-1 overflow-hidden rounded-full bg-slate-200">
+            <span key={s} className="h-1 overflow-hidden rounded-full bg-white/10">
               <motion.span
                 className={cn("block h-full rounded-full", closed ? "bg-gradient-to-r from-favx-blue to-[#1b2a8a]" : "bg-gradient-to-r from-favx-cyan to-favx-blue")}
                 initial={false}
@@ -460,7 +382,7 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
       {/* Mensagens */}
       <div className="relative flex flex-1 flex-col justify-end gap-3 overflow-hidden px-4 py-4 [mask-image:linear-gradient(to_bottom,transparent,black_16%)] sm:px-5">
         <div className="flex justify-center">
-          <span className="rounded-full bg-slate-100 px-3 py-1 text-[11px] text-slate-500">Hoje</span>
+          <span className="rounded-full bg-white/[0.07] px-3 py-1 text-[11px] text-slate-400">Hoje</span>
         </div>
 
         <AnimatePresence initial={false}>
@@ -482,7 +404,7 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
                   <span className="min-w-0">
                     <Bubble from="client" text={m.text} />
                     <span className="mt-1 block text-[11px] text-slate-400">
-                      <span className="text-slate-600">{scenario.client}</span> {m.time}
+                      <span className="text-slate-300">{scenario.client}</span> {m.time}
                     </span>
                   </span>
                 </>
@@ -490,7 +412,7 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
                 <span className="flex min-w-0 flex-col items-end">
                   <Bubble from="ai" text={m.text} />
                   <span className="mt-1 text-[11px] text-slate-400">
-                    <span className="text-slate-600">Nexus AI</span> {m.time}
+                    <span className="text-slate-300">Nexus AI</span> {m.time}
                   </span>
                 </span>
               )}
@@ -506,7 +428,7 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
               className={cn("flex items-center gap-2.5", typing === "ai" && "justify-end")}
             >
               {typing === "client" && <Avatar name={scenario.clientFull} />}
-              <span className="flex items-center gap-1.5 rounded-full bg-slate-100 px-3 py-2.5">
+              <span className="flex items-center gap-1.5 rounded-full bg-white/[0.07] px-3 py-2.5">
                 {[0, 1, 2].map((i) => (
                   <motion.span
                     key={i}
@@ -524,11 +446,11 @@ function ChatDemo({ scenario, onDone }: { scenario: Scenario; onDone: () => void
 
       {/* Barra de envio */}
       <div className="px-4 pb-4 sm:px-5">
-        <div className="flex items-center gap-2 rounded-2xl bg-slate-100 p-2 pl-4">
+        <div className="flex items-center gap-2 rounded-2xl bg-white/[0.07] p-2 pl-4">
           <span className="min-w-0 flex-1 truncate text-sm text-slate-400">
             {typing === "ai" ? "Nexus está digitando…" : `Mensagem para ${scenario.client}`}
           </span>
-          <span className="grid size-8 shrink-0 place-items-center rounded-full border border-black/10 bg-white text-slate-500">
+          <span className="grid size-8 shrink-0 place-items-center rounded-full border border-white/10 bg-[#1b2535] text-slate-300">
             <Plus className="size-4" />
           </span>
           <span className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-favx-blue px-3.5 py-2 text-[13px] font-medium text-white">
@@ -548,7 +470,7 @@ function Bubble({ from, text }: { from: "client" | "ai"; text: string }) {
         "max-w-[min(20rem,82%)] px-4 py-2.5 text-[13.5px] leading-snug",
         from === "ai"
           ? "rounded-2xl rounded-br-sm bg-gradient-to-br from-favx-blue to-[#1b2a8a] text-white"
-          : "rounded-2xl rounded-tl-sm bg-slate-100 text-slate-800"
+          : "rounded-2xl rounded-tl-sm bg-white/[0.07] text-slate-100"
       )}
     >
       {text}
