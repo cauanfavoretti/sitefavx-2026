@@ -3,8 +3,8 @@
 import { useSyncExternalStore } from "react";
 import { cn } from "@/lib/utils";
 
-// Prazo único da campanha: cinco dias a partir de 16/10/2026.
-const CAMPAIGN_END = Date.parse("2026-10-21T20:04:57Z");
+// Prazo único da campanha: 30 dias a partir de 20/10/2026.
+const CAMPAIGN_END = Date.parse("2026-11-19T13:54:14Z");
 const subscribe = (update: () => void) => {
   const timer = window.setInterval(update, 1000);
   return () => window.clearInterval(timer);
