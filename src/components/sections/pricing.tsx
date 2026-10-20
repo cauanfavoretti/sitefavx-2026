@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { BadgeCheck, Check } from "lucide-react";
+import { Check } from "lucide-react";
 
-import { PricingCountdown } from "@/components/campaign-countdown";
 import { Button } from "@/components/ui/button";
 import { openQualify } from "@/components/qualify";
 import { cn } from "@/lib/utils";
@@ -11,9 +10,6 @@ import { cn } from "@/lib/utils";
 type Plan = {
   name: string;
   desc: string;
-  monthly: string;
-  setup: string;
-  promo?: string;
   features: string[];
   featured?: boolean;
 };
@@ -22,9 +18,6 @@ const plans: Plan[] = [
   {
     name: "Plano FAVX hub",
     desc: "A operação inteira dentro do FAVX Hub, com o Nexus AI vendendo por você e uso sem limites.",
-    monthly: "R$ 500",
-    setup: "R$ 850",
-    promo: "Promoção por tempo limitado",
     features: [
       "FAVX Hub",
       "Workflows personalizáveis (construção de IA)",
@@ -73,25 +66,8 @@ export function Pricing() {
               <p className="mt-2 max-w-xs text-muted-foreground">{plan.desc}</p>
 
               <div className="mt-10">
-                {plan.promo && (
-                  <p className="mb-4 flex items-center gap-3">
-                    <span className="relative flex size-2 shrink-0">
-                      <span className="absolute inline-flex size-full animate-ping rounded-full bg-favx-cyan opacity-75" />
-                      <span className="relative inline-flex size-2 rounded-full bg-favx-cyan shadow-[0_0_10px_rgba(124,199,255,0.9)]" />
-                    </span>
-                    <span className="text-favx-orange text-xs font-medium uppercase tracking-[0.2em]">
-                      {plan.promo}
-                    </span>
-                    <span aria-hidden className="h-px flex-1 bg-gradient-to-r from-favx-orange-light/50 to-transparent" />
-                  </p>
-                )}
-                {plan.promo && <PricingCountdown />}
-                <p className="flex items-baseline gap-1">
-                  <span className="text-5xl font-medium tracking-tight">{plan.monthly}</span>
-                  <span className="text-muted-foreground">/mês</span>
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  + <span className="font-medium text-foreground">{plan.setup}</span> de implantação, uma única vez
+                <p className="text-4xl font-medium tracking-tight md:text-5xl">
+                  Teste 7 dias grátis
                 </p>
               </div>
 
@@ -113,17 +89,6 @@ export function Pricing() {
                   </li>
                 ))}
               </ul>
-
-              {/* Adicional disponível no plano */}
-              <p
-                className={cn(
-                  "mt-8 flex items-center gap-2 rounded-2xl px-4 py-3 text-sm",
-                  plan.featured ? "bg-white/[0.06] text-white/80" : "bg-favx-blue/[0.06] text-slate-600"
-                )}
-              >
-                <BadgeCheck className="size-4 shrink-0 text-favx-blue" />
-                Com API Oficial da Meta: <span className="font-medium text-foreground">+ R$ 50/mês</span>
-              </p>
 
               <Button
                 className="mt-6 w-full"
