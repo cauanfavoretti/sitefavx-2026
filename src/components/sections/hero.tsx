@@ -86,7 +86,7 @@ export function Hero() {
               <Button size="lg" className="h-12 min-w-0 px-2 text-[10px] min-[375px]:text-[11px] sm:h-14 sm:px-9 sm:text-[15px]" onClick={openQualify}>
                 Quero saber mais
               </Button>
-              <Button size="lg" variant="outline" className="h-12 min-w-0 gap-1 px-2 text-[10px] min-[375px]:text-[11px] [&_svg]:size-3 sm:h-14 sm:gap-2 sm:px-9 sm:text-[15px] sm:[&_svg]:size-4" onClick={() => scrollToTarget("#produto")}>
+              <Button size="lg" variant="outline" className="h-12 min-w-0 gap-1 px-2 text-[10px] min-[375px]:text-[11px] [&_svg]:size-3 sm:h-14 sm:gap-2 sm:px-9 sm:text-[15px] sm:[&_svg]:size-4" onClick={() => scrollToTarget("#nexus-ai")}>
                 Conheça a FAVX
                 <ArrowUpRight />
               </Button>

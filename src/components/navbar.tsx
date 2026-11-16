@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 
 export const navLinks = [
   { label: "Clientes", href: "#clientes" },
-  { label: "Produto", href: "#produto" },
+  { label: "Produto", href: "#nexus-ai" },
   { label: "Recursos", href: "#recursos" },
   { label: "Preços", href: "#precos" },
   { label: "FAQ", href: "#faq" },
